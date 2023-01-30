@@ -1,0 +1,24 @@
+{{> header}}
+<div class="m-0 vh-100 row justify-content-center align-items-center">
+    <div class="col-auto" style="width: 30rem;">
+        <div class="login">
+            <h1 style="text-align: center;">Dory Malware</h1>
+            <h2 style="text-align: center;">Login</h2>
+            <form id="form">
+                    <label for="name">
+                        <i class="fas fa-user"></i> Your name:
+                    </label>
+                    <input type="text" class="form-control" style="color: white; background-color: black;" id="name" placeholder="Name:" required autocomplete="off" autofocus>
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Your password:
+                    </label>
+                    <input type="password" class="form-control" style="color: white; background-color: black;" id="password" placeholder="Password:" required autocomplete="off">
+                    <input type="hidden" id="token" value="{{token}}">
+                    <input type="submit" class="btn btn-success" value="Login &#10132;">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/scripts/index/login.js"></script>
+{{> footer}}

@@ -1,0 +1,47 @@
+body{
+    background-image: url("https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_960_720.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    font-family: "Century Gothic";
+}
+nav{
+    background-color: black;
+    color: white;
+    width: 100%;
+    z-index: 2;
+    padding: 10px;
+    height: 50px;
+    position: fixed;
+}
+
+.fa-power-off{
+    color: green;
+    transition: all .5s;
+}
+
+.fa-power-off:hover{
+    color: red;
+}
+
+.icon-victim{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.contenedor{
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background: rgba(255,255,255,.4);
+    height: 100vh;
+}
+
+.modal-text{
+    text-align: left;
+    color: white;
+}
+

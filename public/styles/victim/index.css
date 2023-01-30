@@ -1,0 +1,293 @@
+body{
+    background-image: url("https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_960_720.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    font-family: "Century Gothic";
+}
+nav{
+    background-color: black;
+    color: white;
+    position: fixed;
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+    z-index: 2;
+}
+
+.fa-power-off{
+    color: green;
+    transition: all .5s;
+}
+
+.fa-power-off:hover{
+    color: red;
+}
+
+.contenedor{
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background: rgba(255,255,255,.4);
+    height: 100%;
+}
+.recargar{
+    margin-left: 10px;
+}
+
+table.dataTable{
+    text-align: center;
+}
+
+table.dataTable thead{
+    background-color: black;
+    color: white;
+}
+
+table.dataTable tbody{
+    background-color: white;
+    color: black;
+}
+
+
+/* Documents */
+
+#documents_length{
+    color: white;
+}
+
+#documents_filter{
+    color: white;
+}
+
+#documents_filter input {
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#documents_info{
+    color: white;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+#documents_paginate{
+    margin: 10px;
+}
+
+#documents_paginate a{
+    color: white !important;
+}
+
+#documents_length select{
+    color: white;
+}
+
+#documents_length option{
+    color: black;
+}
+
+/* Images */
+
+#images_length{
+    color: white;
+}
+
+#images_filter{
+    color: white;
+}
+
+#images_filter input {
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#images_info{
+    color: white;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+#images_paginate{
+    margin: 10px;
+}
+
+#images_paginate a{
+    color: white !important;
+}
+
+#images_length select{
+    color: white;
+}
+
+#images_length option{
+    color: black;
+}
+
+/* Music */
+
+#music_length{
+    color: white;
+}
+
+#music_filter{
+    color: white;
+}
+
+#music_filter input {
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#music_info{
+    color: white;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+#music_paginate{
+    margin: 10px;
+}
+
+#music_paginate a{
+    color: white !important;
+}
+
+#music_length select{
+    color: white;
+}
+
+#music_length option{
+    color: black;
+}
+
+/* Videos */
+
+#videos_length{
+    color: white;
+}
+
+#videos_filter{
+    color: white;
+}
+
+#videos_filter input {
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#videos_info{
+    color: white;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+#videos_paginate{
+    margin: 10px;
+}
+
+#videos_paginate a{
+    color: white !important;
+}
+
+#videos_length select{
+    color: white;
+}
+
+#videos_length option{
+    color: black;
+}
+
+/* Desktop */
+
+#desktop_length{
+    color: white;
+}
+
+#desktop_filter{
+    color: white;
+}
+
+#desktop_filter input {
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#desktop_info{
+    color: white;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+#desktop_paginate{
+    margin: 10px;
+}
+
+#desktop_paginate a{
+    color: white !important;
+}
+
+#desktop_length select{
+    color: white;
+}
+
+#desktop_length option{
+    color: black;
+}
+
+
+/* Downloads */
+
+#downloads_length{
+    color: white;
+}
+
+#downloads_filter{
+    color: white;
+}
+
+#downloads_filter input {
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#downloads_info{
+    color: white;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+#downloads_paginate{
+    margin: 10px;
+}
+
+#downloads_paginate a{
+    color: white !important;
+}
+
+#downloads_length select{
+    color: white;
+}
+
+#downloads_length option{
+    color: black;
+}

@@ -1,0 +1,105 @@
+body{
+    background-image: url("https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_960_720.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    font-family: "Century Gothic";
+}
+nav{
+    background-color: black;
+    color: white;
+    position: fixed;
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+    z-index: 2;
+}
+
+.fa-power-off{
+    color: green;
+    transition: all .5s;
+}
+
+.fa-power-off:hover{
+    color: red;
+}
+
+.contenedor{
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background: rgba(255,255,255,.4);
+    height: 100%;
+}
+
+.recargar{
+    margin-left: 10px;
+}
+
+table.dataTable{
+    text-align: center;
+}
+
+table.dataTable thead{
+    background-color: black;
+    color: white;
+}
+
+table.dataTable tbody{
+    background-color: white;
+    color: black;
+}
+
+
+/* Documents */
+
+#documents_length{
+    color: white;
+    padding: 20px;
+}
+
+#documents_filter{
+    color: white;
+    padding: 20px;
+}
+
+#documents_filter input {
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#documents_info{
+    color: white;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+#documents_paginate{
+    margin: 10px;
+}
+
+#documents_paginate a{
+    color: white !important;
+}
+
+#documents_length select{
+    color: white;
+}
+
+#documents_length option{
+    color: black;
+}
+
+.form{
+    color: white;
+    text-align: left;
+}
+
+.form input{
+    width: 90%;
+    margin: 10px;
+}
